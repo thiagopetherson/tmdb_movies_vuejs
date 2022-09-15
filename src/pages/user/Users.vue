@@ -28,7 +28,7 @@ export default {
       let formData = new FormData()
       formData.append('text', param)
 
-      this.axios.post('http://127.0.0.1:8000/api/users-list-search', formData, { 
+      this.axios.post(`${this.baseUrl}api/users-list-search`, formData, { 
         headers: {
           "Authorization" : `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

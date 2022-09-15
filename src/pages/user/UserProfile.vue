@@ -83,7 +83,7 @@ export default {
 
         let token = JSON.parse(localStorage.getItem('token'))
         
-        this.axios.get('http://127.0.0.1:8000/api/users/'+this.id,{					
+        this.axios.get(`${this.baseUrl}api/users/${this.id}`,{					
             headers: {
                 "Authorization" : `Bearer ${token}`,              
                 'accept': 'application/json'

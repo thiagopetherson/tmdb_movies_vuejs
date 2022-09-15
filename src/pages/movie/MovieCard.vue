@@ -61,7 +61,7 @@ export default {
 
       let token = JSON.parse(localStorage.getItem('token'))
 
-      this.axios.post('http://127.0.0.1:8000/api/ratings-average-users/', formData, {
+      this.axios.post(`${this.baseUrl}api/ratings-average-users`, formData, {
         headers: {
           "Authorization" : `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -92,7 +92,7 @@ export default {
 
         let token = JSON.parse(localStorage.getItem('token'))
         
-        this.axios.get('http://127.0.0.1:8000/api/ratings-by-movie/'+this.movie.id,{					
+        this.axios.get(`${this.baseUrl}api/ratings-by-movie/${this.movie.id}`,{					
             headers: {
                 "Authorization" : `Bearer ${token}`,
                 'accept': 'application/json'

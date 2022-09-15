@@ -106,7 +106,7 @@ export default {
         let user = JSON.parse(localStorage.getItem('user'))
         let token = JSON.parse(localStorage.getItem('token'))
         
-        await this.axios.post('http://127.0.0.1:8000/api/users/'+user.id, formData, {					
+        await this.axios.post(`${this.baseUrl}api/users/${user.id}`, formData, {					
             headers: {
                 "Authorization" : `Bearer ${token}`,
                 'Content-Type': 'multipart/form-data',

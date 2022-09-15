@@ -61,7 +61,7 @@ export default {
       let token = JSON.parse(localStorage.getItem('token')) 
            
       // Método do logout
-			await this.axios.get('http://127.0.0.1:8000/api/logout',{ headers: {"Authorization" : `Bearer ${token}`} })
+			await this.axios.get(`${this.baseUrl}api/logout`,{ headers: {"Authorization" : `Bearer ${token}`} })
 			.then(resp => {
         if (resp.status == 200) {           
           this.$store.dispatch("user/logoutUser")

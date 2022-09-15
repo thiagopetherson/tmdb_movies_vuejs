@@ -46,7 +46,7 @@ export default {
 
       let token = JSON.parse(localStorage.getItem('token'))
       
-      this.axios.delete('http://127.0.0.1:8000/api/ratings/'+id,{					
+      this.axios.delete(`${this.baseUrl}api/ratings/${id}`,{					
           headers: {
               "Authorization" : `Bearer ${token}`,              
               'accept': 'application/json'

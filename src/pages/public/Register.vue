@@ -45,17 +45,12 @@ export default {
     }
   },
   methods: {
-    async register (event) {     
-      
-      /*
-      if( !this.verifyPasswordFields(event) ) {
-        alert("As senhas não conferem")
-        return
-      }
-      */
-      this.isLoading = true
+    async register (event) {         
 
-      await this.axios.post('http://127.0.0.1:8000/api/register', {
+      
+      this.isLoading = true     
+
+      await this.axios.post(`${this.baseUrl}api/register`, {
 				name: event.name,
         surname: event.surname,
 				email: event.email

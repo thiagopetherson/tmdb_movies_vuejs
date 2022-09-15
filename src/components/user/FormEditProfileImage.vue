@@ -51,7 +51,7 @@ export default {
 
             let token = JSON.parse(localStorage.getItem('token'))
 
-            this.axios.post('http://127.0.0.1:8000/api/user-profiles-change-image-profile', formData, {
+            this.axios.post(`${this.baseUrl}api/user-profiles-change-image-profile`, formData, {
                 headers: {
                     "Authorization" : `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'                          

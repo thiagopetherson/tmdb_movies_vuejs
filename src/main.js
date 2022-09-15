@@ -14,6 +14,12 @@ const emitter = mitt() // Criando a instância do pacote mitt
 import "./assets/css/main.css";
 
 const app = createApp(App)
+
+// let dev = 'http://127.0.0.1:8000/'
+let prod = 'https://top-movies-tmdb-backend.herokuapp.com/'
+let baseUrl = prod
+
+app.config.globalProperties.baseUrl = baseUrl // Configurando a instância do emitter (mitt) para ser usado de forma global
 app.config.globalProperties.emitter = emitter // Configurando a instância do emitter (mitt) para ser usado de forma global
 
 app.use(router)

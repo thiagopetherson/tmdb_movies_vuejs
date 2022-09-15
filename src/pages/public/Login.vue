@@ -38,10 +38,11 @@ export default {
       if ( !this.verifyEmptyFields(event) ) {
         alert('Existem campos em branco')
         return false
-      } 			
+      } 		      
+     
 		
 			// Método do login
-			await this.axios.post('http://127.0.0.1:8000/api/login', {
+			await this.axios.post(`${this.baseUrl}api/login`, {
 				email: event.email,
 				password: event.password
 			})

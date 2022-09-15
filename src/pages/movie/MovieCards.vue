@@ -35,7 +35,7 @@ export default {
 
       let token = JSON.parse(localStorage.getItem('token'))
 
-      this.axios.post('http://127.0.0.1:8000/api/ratings-average-users/', formData, {
+      this.axios.post(`${this.baseUrl}api/ratings-average-users`, formData, {
         headers: {
           "Authorization" : `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
