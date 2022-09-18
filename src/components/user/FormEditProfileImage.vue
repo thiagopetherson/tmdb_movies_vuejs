@@ -1,19 +1,24 @@
 <template>     
     <div class="form-container">
         <div class="form-item">
-            <img v-if="getUser.avatar" class="image" :src="`http://127.0.0.1:8000/storage/${getUser.avatar}?data=${randomNumber(1, 1000)}`" />
-            <img v-else class="image" src="../../assets/images/default-user.png" />
+            <img v-if="getUser.avatar" class="image" :src="`${this.baseUrl}storage/${getUser.avatar}?data=${randomNumber(1, 1000)}`" />
+            <img v-if="!getUser.avatar && getUser.gender == ''" src="../../assets/images/default-user-no-gender.gif" class="image" />
+            <img v-else-if="!getUser.avatar && getUser.gender == 'Masculino'" src="../../assets/images/default-user-m.jpg" class="image" />
+            <img v-else-if="!getUser.avatar && getUser.gender == 'Feminino'" src="../../assets/images/default-user-f.jpg" class="image" />
+            <img v-else-if="!getUser.avatar && getUser.gender == 'Outro Gênero'" src="../../assets/images/default-user-other-gender.jpg" class="image" />
         </div>
         <div class="form-item">
             <form @submit.prevent='saveImage'>     
-                <h1>{{ title }}</h1>  
+                <h1>{{ title }}</h1> 
+                <!-- 
                 <div>  
                     <label>Selecione sua imagem:</label>
                     <input type="file" class="btn-file" @change="setFile" accept=".jpg, .jpeg, .png, .JPG, .PNG"  />
                 </div>                   
                 <div> 
                     <button @click.prevent="saveImage()">SALVAR</button>
-                </div>                
+                </div>
+                -->                
             </form>
         </div>
     </div>
@@ -26,7 +31,7 @@ export default {
   name: 'FormEditProfileImage',
   data () {
     return {
-        title: 'Trocar Imagem de Perfil',
+        title: 'Trocar Imagem de Perfil (Em Breve)',
         form: {
             image: null,
         }

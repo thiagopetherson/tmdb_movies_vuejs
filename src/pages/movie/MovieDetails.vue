@@ -1,6 +1,14 @@
 <template>
   <div>
-    <div class="details"> 
+    <div class="details">
+        <div class="info">
+            <h3><i class="fa-solid fa-film icon-color"></i> Título Original:</h3>
+            <p>{{ movie.original_title }}</p>
+        </div>
+        <div class="info">
+            <h3><i class="fa-solid fa-film icon-color"></i> Gênero:</h3>
+            <p><span v-for="(genre, index) in movie.genres" :key="index"><span class="span-genre-separator"> &#10022; </span>{{ genre.name }}</span></p>
+        </div> 
         <div class="info">
             <h3><i class="fa-solid fa-calendar-days icon-color"></i> Data de Lançamento:</h3>
             <p>{{ brazilianDate(movie.release_date) }}</p>
@@ -48,6 +56,9 @@ export default {
           currency: "USD",
         });
     }
+  },
+  mounted() {
+    console.log(this.movie)
   }
 }
 </script>
@@ -71,6 +82,11 @@ export default {
     
     p 
       text-align: left
+
+      span
+        
+        .span-genre-separator
+          color: #f7d354
 
   .description 
     p 

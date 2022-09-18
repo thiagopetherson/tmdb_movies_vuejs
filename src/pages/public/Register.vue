@@ -45,8 +45,7 @@ export default {
     }
   },
   methods: {
-    async register (event) {         
-
+    async register (event) {
       
       this.isLoading = true     
 

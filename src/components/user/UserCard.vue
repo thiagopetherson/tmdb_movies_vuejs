@@ -10,8 +10,11 @@
         <div class="users-container">   
             <div class="users-container-item" v-for="(user, index) in users" :key="index">
                 <div class="div-img">
-                    <img v-if="user.user_profile.avatar" :src="`http://127.0.0.1:8000/storage/${user.user_profile.avatar}?data=${randomNumber(1, 1000)}`" />
-                    <img v-else src="../../assets/images/default-user-2.png" />           
+                    <img v-if="user.user_profile.avatar" :src="`${this.baseUrl}storage/${user.user_profile.avatar}?data=${randomNumber(1, 1000)}`" />
+                    <img v-if="!user.user_profile.avatar && user.user_profile.gender == ''" src="../../assets/images/default-user-no-gender.gif" />
+                    <img v-else-if="!user.user_profile.avatar && user.user_profile.gender == 'Masculino'" src="../../assets/images/default-user-m.jpg" />
+                    <img v-else-if="!user.user_profile.avatar && user.user_profile.gender == 'Feminino'" src="../../assets/images/default-user-f.jpg" />
+                    <img v-else-if="!user.user_profile.avatar && user.user_profile.gender == 'Outro Gênero'" src="../../assets/images/default-user-other-gender.jpg" />           
                 </div>
                 <div class="div-description">
                     <h4>{{ user.user_profile.alias }}</h4>

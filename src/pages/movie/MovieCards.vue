@@ -43,10 +43,9 @@ export default {
         }
       })        
       .then(response => {          
-        if(response.status == 200) {
-           console.log(response.data)
-           this.usersAverage = response.data.average
-           this.ratingsCount = response.data.ratings_count
+        if(response.status == 200) {           
+          this.usersAverage = response.data.average
+          this.ratingsCount = response.data.ratings_count
         } 
       })
       .catch((error) => { 
@@ -114,7 +113,6 @@ export default {
     .router-link
       background-color: #f7d354
       border: 2px solid #f7d354
-      border-radius: 4px
       color: #000
       padding: 1rem 0.5rem
       text-align: center

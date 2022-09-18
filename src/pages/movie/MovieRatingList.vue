@@ -3,8 +3,11 @@
         <div class="image-username-date">
             <div class="rating-user-img">
                 <router-link :to="`/user-profile/${rating.user.user_profile.id}`">
-                  <img class="user-img" v-if="rating.user.user_profile.avatar" :src="`http://127.0.0.1:8000/storage/${rating.user.user_profile.avatar}?data=${randomNumber(1, 1000)}`" />
-                  <img class="user-img" v-else src="../../assets/images/default-user-2.png" />
+                  <img class="user-img" v-if="rating.user.user_profile.avatar" :src="`${this.baseUrl}storage/${rating.user.user_profile.avatar}?data=${randomNumber(1, 1000)}`" />
+                  <img v-if="!rating.user.user_profile.avatar && rating.user.user_profile.gender == ''" src="../../assets/images/default-user-no-gender.gif" class="user-img" />
+                  <img v-else-if="!rating.user.user_profile.avatar && rating.user.user_profile.gender == 'Masculino'" src="../../assets/images/default-user-m.jpg" class="user-img" />
+                  <img v-else-if="!rating.user.user_profile.avatar && rating.user.user_profile.gender == 'Feminino'" src="../../assets/images/default-user-f.jpg" class="user-img" />
+                  <img v-else-if="!rating.user.user_profile.avatar && rating.user.user_profile.gender == 'Outro Gênero'" src="../../assets/images/default-user-other-gender.jpg" class="user-img" />
                 </router-link>
                 <span class="username-createdat">{{ rating.user.user_profile.alias }} - {{ brazilianDate(rating.created_at) }}</span>
             </div>           

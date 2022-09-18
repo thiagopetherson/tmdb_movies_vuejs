@@ -29,12 +29,29 @@ export default {
     getBusca: 'getBusca'
   }),
   methods: {
-    async getMovies () {
-      const searchWithQueryURL = `https://api.themoviedb.org/3/search/movie/?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&query=${this.getBusca}&language=pt-BR`
-      await this.axios.get(searchWithQueryURL)        
-        .then(resp => {          
-          this.movies = resp.data.results          
-        })  
+    getMovies () {      
+      this.axios.get(`https://api.themoviedb.org/3/search/movie/?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&query=${this.getBusca}&language=pt-BR`)        
+      .then(response => {          
+        this.movies = response.data.results
+        
+        this.axios.get(`https://api.themoviedb.org/3/search/movie/?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&query=${this.getBusca}&language=pt-BR&page=2`)        
+        .then(response => {  
+          if (response.data.results) {        
+            for (let i = 0; i < response.data.results.length; i++) {
+              this.movies.push(response.data.results[i])
+            }
+          }
+          
+          this.axios.get(`https://api.themoviedb.org/3/search/movie/?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&query=${this.getBusca}&language=pt-BR&page=3`)        
+          .then(response => {  
+            if (response.data.results) {        
+              for (let i = 0; i < response.data.results.length; i++) {
+                this.movies.push(response.data.results[i])
+              }   
+            }       
+          })
+        })
+      })
     }
   },
   mounted () {

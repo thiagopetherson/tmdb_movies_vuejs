@@ -40,12 +40,40 @@ export default {
       this.axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR`)        
       .then(response => {   
         this.movies = response.data.results
+
+        this.axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR&page=2`)        
+        .then(response => {   
+          for (let i = 0; i < response.data.results.length; i++) {
+            this.movies.push(response.data.results[i])
+          }
+
+          this.axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR&page=3`)        
+          .then(response => {   
+            for (let i = 0; i < response.data.results.length; i++) {
+              this.movies.push(response.data.results[i])
+            }
+          })
+        }) 
       })  
     },
     getMoviesForGenre () {
       this.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&with_genres=${this.genreSelected}&sort_by=vote_average.desc&vote_count.gte=10&language=pt-BR`)        
       .then(response => {          
         this.movies = response.data.results
+
+        this.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&with_genres=${this.genreSelected}&sort_by=vote_average.desc&vote_count.gte=10&language=pt-BR`)        
+        .then(response => {          
+          for (let i = 0; i < response.data.results.length; i++) {
+            this.movies.push(response.data.results[i])
+          }
+
+          this.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&with_genres=${this.genreSelected}&sort_by=vote_average.desc&vote_count.gte=10&language=pt-BR`)        
+          .then(response => {          
+            for (let i = 0; i < response.data.results.length; i++) {
+              this.movies.push(response.data.results[i])
+            }
+          })
+        }) 
       })  
     },
     getGenres () {

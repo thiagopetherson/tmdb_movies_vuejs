@@ -162,6 +162,9 @@ export default {
     this.emitter.on('clearReviewFields', () => {
       this.completeFieldsForm()
     })
+
+    this.emitter.emit('reloadRatings') // Executando um evento de outro componente
+
     this.completeFieldsForm()
   }
 }

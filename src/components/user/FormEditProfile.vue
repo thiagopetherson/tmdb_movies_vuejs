@@ -7,7 +7,8 @@
                     Os campos preenchidos aparecerão no seu perfil público.
                 </p>
                 <div> 
-                    <button class="btn-change-image" @click="this.$router.push({ name: 'edit-profile-image' })">TROCAR IMAGEM</button>
+                    <!-- <button class="btn-change-image" @click="this.$router.push({ name: 'edit-profile-image' })">TROCAR IMAGEM</button>-->
+                    <router-link class="btn-change-image" to="/edit-profile-image">Trocar Imagem</router-link>
                 </div> 
                 <div>  
                     <label>Nome:</label>
@@ -181,7 +182,7 @@ export default {
                 margin-bottom: 10px
 
             p
-                margin-bottom: 10px
+                margin-bottom: 20px
             
             .link
                 margin-top: 1rem
@@ -242,7 +243,7 @@ export default {
                         background-color: transparent
                         color: #f7d354
 
-                .btn-change-image                               
+                .btn-change-image
                     width: 30%
                     background-color: #f7d354
                     border: 2px solid #f7d354

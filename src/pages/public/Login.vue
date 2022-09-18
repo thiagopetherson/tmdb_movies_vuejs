@@ -1,5 +1,10 @@
 <template>
-  <div>       
+  <div>    
+     <loading :active="isLoading"
+      :can-cancel="true"
+      :on-cancel="onCancel"
+      :is-full-page="fullPage"
+    />   
     <div class="login">       
         <FormLoginRegister @submitForm="login($event)" :typeForm="typeForm" />              
     </div>
@@ -9,15 +14,20 @@
 <script>
 import globalMixins from '@/mixins/globalMixins'
 import FormLoginRegister from '@/components/public/FormLoginRegister.vue'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 export default {
   name: 'Login',
   components: {
     FormLoginRegister: FormLoginRegister,
+    Loading: Loading,
   },
   data () {
     return {      
       typeForm: 'Login',
+      isLoading: false,
+      fullPage: true
     }
   },
   mixins: [globalMixins],
@@ -40,7 +50,8 @@ export default {
         return false
       } 		      
      
-		
+      this.isLoading = true
+
 			// Método do login
 			await this.axios.post(`${this.baseUrl}api/login`, {
 				email: event.email,
@@ -57,19 +68,22 @@ export default {
           this.$store.dispatch({type: 'user/loginUser', user, token})
           localStorage.setItem('user', JSON.stringify(this.getUser))
           localStorage.setItem('token', JSON.stringify(this.getToken))
-          localStorage.setItem('loggedIn', JSON.stringify(this.getLoggedIn))        
+          localStorage.setItem('loggedIn', JSON.stringify(this.getLoggedIn))  
 
-          this.$swal("Sucesso!", 'Login Efetuado.', "success");        
-
+          this.isLoading = false
+          this.$swal("Bem vindo!", 'Login efetuado com sucesso.', "success");  
           this.$router.push({ path: '/movies' })				
-        } else {				
+        } else {			
+          this.isLoading = false	
           alert("Algum erro aconteceu!") 			
         }
         
 					
 			})
 			.catch(error => {
-        
+
+        this.isLoading = false
+
 				console.log(error.response)
 
         if (error.response.data.errors) {

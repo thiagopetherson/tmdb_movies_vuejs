@@ -9,6 +9,7 @@ const Users = () => import('@/pages/user/Users.vue')
 const Movies = () => import('@/pages/movie/Movies.vue')
 const Movie = () => import('@/pages/movie/Movie.vue')
 const MovieSearch = () => import('@/pages/movie/MovieSearch.vue')
+const News = () => import('@/pages/news/News.vue')
 
 const routes = [
   {
@@ -58,6 +59,11 @@ const routes = [
     name: 'search',
     props: true,
     component: MovieSearch,
+  },
+  {
+    path: '/news',
+    name: 'news',
+    component: News,
   },
 ]
 

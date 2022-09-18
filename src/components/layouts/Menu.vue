@@ -1,7 +1,12 @@
 <template>
-  <div class="menu-container">
+  <div class="menu-container">        
+
         <div class="header-item header-item-1">
             <i class="fa-solid fa-video"></i>&nbsp; <router-link to="/movies">Top Movies</router-link>
+        </div>
+
+        <div class="header-item header-item-6">           
+            <button class="btn-news" @click="this.$router.push({ name: 'news' })">News</button>
         </div>
 
         <div class="header-item header-item-2">
@@ -15,8 +20,11 @@
 
         <div class="header-item header-item-4">   
             <span class="span-alias">{{ getUser.alias }}</span>
-            <img v-if="getUser.avatar" :src="`http://127.0.0.1:8000/storage/${getUser.avatar}?data=${randomNumber(1, 1000)}`" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />   
-            <img v-else src="../../assets/images/default-user-2.png" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />
+            <img v-if="getUser.avatar" :src="`${this.baseUrl}storage/${getUser.avatar}?data=${randomNumber(1, 1000)}`" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />   
+            <img v-if="!getUser.avatar && getUser.gender == ''" src="../../assets/images/default-user-no-gender.gif" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />
+            <img v-else-if="!getUser.avatar && getUser.gender == 'Masculino'" src="../../assets/images/default-user-m.jpg" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />
+            <img v-else-if="!getUser.avatar && getUser.gender == 'Feminino'" src="../../assets/images/default-user-f.jpg" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />
+            <img v-else-if="!getUser.avatar && getUser.gender == 'Outro Gênero'" src="../../assets/images/default-user-other-gender.jpg" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />
         </div> 
 
         <div class="header-item header-item-5">           
@@ -120,6 +128,27 @@ export default {
     .fa-video
       color: #F7D354
 
+  .header-item-6   
+    color: black
+    display: flex
+    flex-direction: row    
+    justify-content: center    
+    margin-right: 15px
+
+    .btn-news
+      padding: 10px
+      background-color: #00FF7F
+      border: 2px solid #00FF7F       
+      color: #000
+      padding: .5rem        
+      display: flex
+      align-items: center
+      cursor: pointer
+
+      &:hover
+          background-color: transparent
+          color: #00FF7F  
+
   .header-item-2    
     color: black
     display: flex
@@ -128,9 +157,9 @@ export default {
     margin-right: 15px
 
     .campo-texto
-        padding: 10px
-        border: none
-        color: black
+      padding: 10px
+      border: none
+      color: black
 
     .botao-busca
         padding: 10px
@@ -178,6 +207,7 @@ export default {
       color: #F7D354
 
     .profile-image
+      margin-left: 4px
       cursor: pointer
       width: 35px
       border-radius: 50%

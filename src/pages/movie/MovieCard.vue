@@ -169,7 +169,6 @@ export default {
     .router-link
       background-color: #f7d354
       border: 2px solid #f7d354
-      border-radius: 4px
       color: #000
       padding: 1rem 0.5rem
       text-align: center

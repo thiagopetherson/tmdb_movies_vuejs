@@ -16,7 +16,10 @@
         <h4 v-else class="h4-profile-phrase">{{ user.profile_phrase }}O usuário prefere deixar um ar misterioso</h4>
 
         <img v-if="user.avatar" class="image" :src="`http://127.0.0.1:8000/storage/${user.avatar}?data=${randomNumber(1, 1000)}`" />
-        <img v-else class="image" src="../../assets/images/default-user.png" /> 
+        <img v-if="!user.avatar && user.gender == ''" src="../../assets/images/default-user-no-gender.gif" class="image" />
+        <img v-else-if="!user.avatar && user.gender == 'Masculino'" src="../../assets/images/default-user-m.jpg" class="image" />
+        <img v-else-if="!user.avatar && user.gender == 'Feminino'" src="../../assets/images/default-user-f.jpg" class="image" />
+        <img v-else-if="!user.avatar && user.gender == 'Outro Gênero'" src="../../assets/images/default-user-other-gender.jpg" class="image" /> 
 
         <h2 class="field-title">Nome</h2>    
         <p>{{ user.name + ' ' + user.surname }}</p>
