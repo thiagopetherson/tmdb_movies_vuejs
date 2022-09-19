@@ -15,8 +15,8 @@ import "./assets/css/main.css";
 
 const app = createApp(App)
 
-let url = 'http://127.0.0.1:8000/' // Dev
-// let url = 'https://top-movies-tmdb-backend.herokuapp.com/' // Prod
+// let url = 'http://127.0.0.1:8000/' // Dev
+let url = 'https://top-movies-tmdb-backend.herokuapp.com/' // Prod
 let baseUrl = url
 app.config.globalProperties.baseUrl = baseUrl // Variável global
 
