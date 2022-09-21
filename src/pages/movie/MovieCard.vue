@@ -54,14 +54,14 @@ export default {
     }
   },
   methods: {
-    getAverageUsers () {
+    async getAverageUsers () {
 
       let formData = new FormData()
       formData.append("movie_id", this.movie.id)    
 
       let token = JSON.parse(localStorage.getItem('token'))
 
-      this.axios.post(`${this.baseUrl}api/ratings-average-users`, formData, {
+      await this.axios.post(`${this.baseUrl}api/ratings-average-users`, formData, {
         headers: {
           "Authorization" : `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -88,11 +88,11 @@ export default {
       })
 
     },
-    getMovieRatings () {
+    async getMovieRatings () {
 
         let token = JSON.parse(localStorage.getItem('token'))
         
-        this.axios.get(`${this.baseUrl}api/ratings-by-movie/${this.movie.id}`,{					
+        await this.axios.get(`${this.baseUrl}api/ratings-by-movie/${this.movie.id}`,{					
             headers: {
                 "Authorization" : `Bearer ${token}`,
                 'accept': 'application/json'

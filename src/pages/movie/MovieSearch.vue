@@ -5,18 +5,23 @@
     <div class="movie-search">    
       <MovieCards v-for="(movie, index) in movies" :key="index" :movie="movie" />
     </div>
+    <div class="div-footer">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import Menu from '@/components/layouts/Menu.vue'
+import Footer from '@/components/layouts/Footer.vue'
 import MovieCards from '@/pages/movie/MovieCards.vue'
 
 export default {
   name: 'MovieSearch',
   components: {
     Menu: Menu,
+    Footer: Footer,
     MovieCards: MovieCards,
   },
   data () {
@@ -75,5 +80,9 @@ h1
   display: flex
   flex-wrap: wrap
   justify-content: space-around
+
+.div-footer
+  margin-top: 5rem
+  position: relative
 
 </style>

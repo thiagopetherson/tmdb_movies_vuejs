@@ -13,18 +13,22 @@
     <div class="movies">
       <MovieCards v-for="(movie, index) in movies" :key="index" :movie="movie" />
     </div>
-
+    <div class="div-footer">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
 import Menu from '@/components/layouts/Menu.vue'
+import Footer from '@/components/layouts/Footer.vue'
 import MovieCards from '@/pages/movie/MovieCards.vue'
 
 export default {
   name: 'Movies',
   components: {
     Menu: Menu,
+    Footer: Footer,
     MovieCards: MovieCards,
   },
   data () {
@@ -36,8 +40,8 @@ export default {
     }
   },
   methods: {
-    getMovies () {
-      this.axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR`)        
+    async getMovies () {
+      await this.axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR`)        
       .then(response => {   
         this.movies = response.data.results
 
@@ -127,5 +131,9 @@ h1
   display: flex
   flex-wrap: wrap
   justify-content: space-around
+
+.div-footer
+  margin-top: 5rem
+  position: relative
 
 </style>

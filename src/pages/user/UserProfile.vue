@@ -2,7 +2,7 @@
   <div>
     <Menu />    
     <div v-if="id == getUser.id" class="user-edit">
-      <div class="user-edit">
+      <div class="user-edit-button">
         <button class="btn-edit" @click="this.$router.push({ name: 'edit-profile' })">EDITAR PERFIL</button>
       </div>
     </div>
@@ -45,19 +45,23 @@
         <p v-else class="p-biography">O usuário não definiu um texto para biografia</p>
       </div>
     </div>
+    <div class="div-footer">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
 import globalMixins from '@/mixins/globalMixins'
 import Menu from '@/components/layouts/Menu.vue'
-
+import Footer from '@/components/layouts/Footer.vue'
 
 export default {
   name: 'UserProfile',
   props: ['id'],
   components: {
-    Menu: Menu   
+    Menu: Menu,
+    Footer: Footer,
   },
   data () {
     return {
@@ -127,7 +131,7 @@ export default {
   flex-direction: row
   justify-content: center
 
-  .user-edit
+  .user-edit-button
     width: 40%
     display: flex
     flex-direction: row
@@ -172,5 +176,9 @@ export default {
     .p-biography
       margin-top: 5px
       text-align: justify
+
+.div-footer
+  margin-top: 5rem
+  position: relative
         
 </style>

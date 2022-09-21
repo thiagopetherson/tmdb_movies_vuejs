@@ -2,17 +2,20 @@
     <div>
         <Menu />
         <UserCard :users="users" @search-users="searchUsers($event)"/>
+        <Footer />
     </div>
 </template>
 
 <script>
 import Menu from '@/components/layouts/Menu.vue'
+import Footer from '@/components/layouts/Footer.vue'
 import UserCard from '@/components/user/UserCard.vue'
 
 export default {
   name: 'Users',
   components: {
     Menu: Menu,
+    Footer: Footer,
     UserCard: UserCard,
   },
   data () {
@@ -38,7 +41,6 @@ export default {
       .then(response => {
           if (response.status == 200) {
             this.users = response.data.users
-            console.log(this.users)
           }
       })
       .catch(error => {   

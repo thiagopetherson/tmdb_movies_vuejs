@@ -41,11 +41,10 @@ export default {
   },
   mixins: [globalMixins],
   methods: {
-        getMovie () {
-            this.axios.get(`https://api.themoviedb.org/3/movie/${this.rating.movie_id}?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR`)        
+        async getMovie () {
+            await this.axios.get(`https://api.themoviedb.org/3/movie/${this.rating.movie_id}?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR`)        
             .then(response => {             
-                this.movie = response.data  
-                console.log(this.movie)       
+                this.movie = response.data
             })  
         }
   },

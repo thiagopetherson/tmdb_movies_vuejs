@@ -10,6 +10,7 @@ const Movies = () => import('@/pages/movie/Movies.vue')
 const Movie = () => import('@/pages/movie/Movie.vue')
 const MovieSearch = () => import('@/pages/movie/MovieSearch.vue')
 const News = () => import('@/pages/news/News.vue')
+const Description = () => import('@/pages/description/Description.vue')
 
 const routes = [
   {
@@ -65,6 +66,11 @@ const routes = [
     name: 'news',
     component: News,
   },
+  {
+    path: '/description',
+    name: 'description',
+    component: Description,
+  },
 ]
 
 const router = createRouter({
@@ -86,8 +92,10 @@ router.beforeEach((to, from, next) => {
      
   if ( (to.name !== 'login' && to.name !== 'register') && (user == null) ) {        
       next({ name: 'login' }) 
+  } else if ( (to.name == 'login' || to.name == 'register') && (user) ) {
+    next({ name: 'movies' }) 
   } else {        
-      next() 
+      next()
   } 
      
 });

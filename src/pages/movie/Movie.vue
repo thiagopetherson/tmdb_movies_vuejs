@@ -5,17 +5,22 @@
     <div class="movies">    
       <MovieCard :movie="movie" />
     </div>
+    <div class="div-footer">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
 import Menu from '@/components/layouts/Menu.vue'
+import Footer from '@/components/layouts/Footer.vue'
 import MovieCard from '@/pages/movie/MovieCard.vue'
 
 export default {
   name: 'Movie',
   components: {
     Menu: Menu,
+    Footer: Footer,
     MovieCard: MovieCard,
   },
   props: ['id'],
@@ -52,5 +57,9 @@ h1
   display: flex
   flex-wrap: wrap
   justify-content: space-around
+
+.div-footer
+  margin-top: 5rem
+  position: relative
 
 </style>

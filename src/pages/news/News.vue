@@ -5,11 +5,15 @@
         <h2>Últimas Avaliações</h2>
         <NewsDetails v-for="(r, index) in ratings" :key="index" :rating="r" />
     </div>
+    <div class="div-footer">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
 import Menu from '@/components/layouts/Menu.vue'
+import Footer from '@/components/layouts/Footer.vue'
 import NewsDetails from '@/components/news/NewsDetails.vue'
 import globalMixins from '@/mixins/globalMixins'
 
@@ -18,6 +22,7 @@ export default {
   components: {
     NewsDetails: NewsDetails,
     Menu: Menu,
+    Footer: Footer,
   },
   data () {
     return {      
@@ -31,12 +36,10 @@ export default {
       let token = JSON.parse(localStorage.getItem('token')) 
 
 	this.axios.get(`${this.baseUrl}api/ratings-last-ratings`,{ headers: {"Authorization" : `Bearer ${token}`} })
-	.then(response => {
-        if (response.status == 200) {           
-            this.ratings = response.data.ratings
-        }
-
-        console.log(this.ratings)
+      .then(response => {
+          if (response.status == 200) {           
+              this.ratings = response.data.ratings
+          }
       })
       .catch(error => {   
         console.log(error)
@@ -73,5 +76,9 @@ export default {
     h2
       font-weight: bold
       margin-bottom: 10px
+
+.div-footer
+  margin-top: 5rem
+  position: relative
 
 </style>

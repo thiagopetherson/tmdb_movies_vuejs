@@ -5,7 +5,7 @@
             <i class="fa-solid fa-video"></i>&nbsp; <router-link to="/movies">Top Movies</router-link>
         </div>
 
-        <div class="header-item header-item-6">           
+        <div class="header-item header-item-7">           
             <button class="btn-news" @click="this.$router.push({ name: 'news' })">News</button>
         </div>
 
@@ -16,18 +16,22 @@
 
         <div class="header-item header-item-3">           
             <button class="btn-users" @click="this.$router.push({ name: 'list-users' })">Todos os Usuários</button>
-        </div>      
+        </div>   
 
-        <div class="header-item header-item-4">   
+        <div class="header-item header-item-4">           
+            <button class="botao-tmdb" @click="this.$router.push({ name: 'description' })">O que é TMDB</button>
+        </div>   
+
+        <div class="header-item header-item-5">   
             <span class="span-alias">{{ getUser.alias }}</span>
             <img v-if="getUser.avatar" :src="`${this.baseUrl}storage/${getUser.avatar}?data=${randomNumber(1, 1000)}`" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />   
             <img v-if="!getUser.avatar && getUser.gender == ''" src="../../assets/images/default-user-no-gender.gif" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />
             <img v-else-if="!getUser.avatar && getUser.gender == 'Masculino'" src="../../assets/images/default-user-m.jpg" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />
             <img v-else-if="!getUser.avatar && getUser.gender == 'Feminino'" src="../../assets/images/default-user-f.jpg" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />
             <img v-else-if="!getUser.avatar && getUser.gender == 'Outro Gênero'" src="../../assets/images/default-user-other-gender.jpg" class="profile-image" @click="this.$router.push({ name: 'user-profile', params: {id: getUser.id} })" />
-        </div> 
+        </div>        
 
-        <div class="header-item header-item-5">           
+        <div class="header-item header-item-6">           
             <button class="botao-sair" @click="logout">Sair</button>
         </div>      
   </div>
@@ -128,7 +132,7 @@ export default {
     .fa-video
       color: #F7D354
 
-  .header-item-6   
+  .header-item-7   
     color: black
     display: flex
     flex-direction: row    
@@ -137,8 +141,8 @@ export default {
 
     .btn-news
       padding: 10px
-      background-color: #00FF7F
-      border: 2px solid #00FF7F       
+      background-color: #F7D354
+      border: 2px solid #F7D354       
       color: #000
       padding: .5rem        
       display: flex
@@ -147,7 +151,7 @@ export default {
 
       &:hover
           background-color: transparent
-          color: #00FF7F  
+          color: #F7D354  
 
   .header-item-2    
     color: black
@@ -195,8 +199,29 @@ export default {
         &:hover
             background-color: transparent
             color: #F7D354
-
+  
   .header-item-4   
+    color: black
+    display: flex
+    flex-direction: row    
+    justify-content: center    
+    margin-right: 10px
+
+    .botao-tmdb
+        padding: 10px
+        background-color: #F7D354
+        border: 2px solid #F7D354    
+        color: #000
+        padding: .5rem        
+        display: flex
+        align-items: center
+        cursor: pointer
+
+        &:hover
+            background-color: transparent
+            color: #F7D354
+
+  .header-item-5   
     color: black
     display: flex
     flex-direction: row    
@@ -210,9 +235,9 @@ export default {
       margin-left: 4px
       cursor: pointer
       width: 35px
-      border-radius: 50%
+      border-radius: 50%  
 
-  .header-item-5   
+  .header-item-6   
     color: black
     display: flex
     flex-direction: row    
@@ -221,9 +246,10 @@ export default {
 
     .botao-sair
         padding: 10px
-        background-color: #F7D354
-        border: 2px solid #F7D354       
-        color: #000
+        background-color: #DC143C
+        border: 2px solid #DC143C   
+        font-weight: bold    
+        color: #FFF
         padding: .5rem        
         display: flex
         align-items: center
