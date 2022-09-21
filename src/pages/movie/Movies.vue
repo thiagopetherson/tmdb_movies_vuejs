@@ -3,7 +3,9 @@
     <Menu />
     <div class="selection"> 
         <select v-model="genreSelected" @change="changeSelect">
-            <option value="">GÊNERO</option>
+            <option value="most popular">MAIS POPULARES</option>            
+            <option value="best evaluated">MAIS BEM AVALIADOS</option>
+            <option value="at the movies">NOS CINEMAS</option>
             <option v-for="genre in genres" :value="genre.id" :key="genre.id">{{ genre.name }}</option>          
         </select>                    
     </div>
@@ -34,24 +36,24 @@ export default {
   data () {
     return {
       title: 'Melhores Filmes',
-      genreSelected: '',
+      genreSelected: 'most popular',
       genres: [],
       movies: [],
     }
   },
   methods: {
-    async getMovies () {
-      await this.axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR`)        
+    async getMovies ($param) {
+      await this.axios.get(`https://api.themoviedb.org/3/movie/${$param}?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&region=BR&language=pt-BR`)        
       .then(response => {   
         this.movies = response.data.results
 
-        this.axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR&page=2`)        
+        this.axios.get(`https://api.themoviedb.org/3/movie/${$param}?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&region=BR&language=pt-BR&page=2`)        
         .then(response => {   
           for (let i = 0; i < response.data.results.length; i++) {
             this.movies.push(response.data.results[i])
           }
 
-          this.axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR&page=3`)        
+          this.axios.get(`https://api.themoviedb.org/3/movie/${$param}?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&region=BR&language=pt-BR&page=3`)        
           .then(response => {   
             for (let i = 0; i < response.data.results.length; i++) {
               this.movies.push(response.data.results[i])
@@ -61,17 +63,17 @@ export default {
       })  
     },
     getMoviesForGenre () {
-      this.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&with_genres=${this.genreSelected}&sort_by=vote_average.desc&vote_count.gte=10&language=pt-BR`)        
+      this.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&with_genres=${this.genreSelected}&sort_by=vote_average.desc&vote_count.gte=10&region=BR&language=pt-BR`)        
       .then(response => {          
         this.movies = response.data.results
 
-        this.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&with_genres=${this.genreSelected}&sort_by=vote_average.desc&vote_count.gte=10&language=pt-BR&page=2`)        
+        this.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&with_genres=${this.genreSelected}&sort_by=vote_average.desc&vote_count.gte=10&region=BR&language=pt-BR&page=2`)        
         .then(response => {          
           for (let i = 0; i < response.data.results.length; i++) {
             this.movies.push(response.data.results[i])
           }
 
-          this.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&with_genres=${this.genreSelected}&sort_by=vote_average.desc&vote_count.gte=10&language=pt-BR&page=3`)        
+          this.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&with_genres=${this.genreSelected}&sort_by=vote_average.desc&vote_count.gte=10&region=BR&language=pt-BR&page=3`)        
           .then(response => {          
             for (let i = 0; i < response.data.results.length; i++) {
               this.movies.push(response.data.results[i])
@@ -81,19 +83,21 @@ export default {
       })  
     },
     getGenres () {
-      this.axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&language=pt-BR`)        
+      this.axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=7c239e80ee7bf4bc9b4fcea4906f0e3f&region=BR&language=pt-BR`)        
       .then(response => {
         this.genres = response.data.genres
       })  
     },
     changeSelect () {
-      if (this.genreSelected === "") this.getMovies()
+      if (this.genreSelected === "most popular") this.getMovies("popular")
+      else if (this.genreSelected === "best evaluated") this.getMovies("top_rated")
+      else if (this.genreSelected === "at the movies") this.getMovies("upcoming")
       else this.getMoviesForGenre()
     }
   },
   mounted () {
     this.getGenres()
-    this.getMovies()
+    this.getMovies('popular')
   }
 }
 </script>

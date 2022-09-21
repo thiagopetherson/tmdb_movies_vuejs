@@ -49,7 +49,6 @@ export default {
         }
   },
   mounted () {
-    console.log(this.rating)
     this.getMovie()
   }
 }
